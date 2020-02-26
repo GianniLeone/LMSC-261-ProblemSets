@@ -26,6 +26,7 @@ LMSC-261
 -   ProblemSet5.1.c
 -   ProblemSet5.2.c
 -   ProblemSet5.3.c
+-   LoremIpsum.txt
 
 ### Purpose
 

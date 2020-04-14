@@ -1,7 +1,12 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
     <meta charset="utf-8">
     <title>Player</title>
 
@@ -10,7 +15,7 @@
 
     <script src="https://unpkg.com/@webcomponents/webcomponentsjs@^2/webcomponents-bundle.js"></script>
     <script src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
-    <script src="https://raw.githubusercontent.com/Tonejs/Tone.js/dev/examples/js/tonejs-ui.js"></script>
+    <script src="tonejs-ui.js"></script>
     <style type="text/css">
         tone-play-toggle {
             margin-bottom: 10px;
@@ -19,31 +24,89 @@
 </head>
 
 <body>
-    <tone-example>
-        <tone-loader></tone-loader>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Giannis Website</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="index.html">Home </a>
+                <a class="nav-item nav-link active" href="page1.html">Page 1</a>
+                <a class="nav-item nav-link" href="page2.html">Page 2</a>
+                <a class="nav-item nav-link" href="page3.html">Page 3</a>
+            </div>
+        </div>
+    </nav>
 
-        <tone-explanation label="Player">
-            Click on the button to play the audio file on loop using <a href="https://tonejs.github.io/docs/Player">Tone.Player</a>.
-        </tone-explanation>
 
-        <tone-content>
-            <tone-play-toggle></tone-play-toggle>
-            <tone-player></tone-player>
-        </tone-content>
-    </tone-example>
+
+    <tone-loader></tone-loader>
+
+    <tone-explanation label="Player">
+        Click on the button to play the audio file on loop using <a href="https://tonejs.github.io/docs/Player">Tone.Player</a>.
+    </tone-explanation>
+
+    <tone-content>
+
+        <tone-play-toggle></tone-play-toggle>
+        <tone-player></tone-player>
+        <button onclick="ReverbToggle()">ON/OFF</button>
+        <tone-reverb></tone-reverb>
+        <button onclick="ChorusToggle()">ON/OFF</button>
+        <tone-chorus></tone-chorus>
+        <button onclick="TremoloToggle()">ON/OFF</button>
+        <tone-tremolo></tone-tremolo>
+
+    </tone-content>
 
     <script type="text/javascript">
         //the player
-        var player = new Tone.Player({
-            "url": "./audio/FWDL.[mp3|ogg]",
-            "loop": true,
-            "loopStart": 0.5,
-            "loopEnd": 0.7,
-        }).toMaster();
+
+        var reverb = new Tone.Reverb();
+        reverb.generate()
+        var chorus = new Tone.Chorus(4, 2.5, 0.5);
+        var tremolo = new Tone.Tremolo(9, 0.75);
+        var player = new Tone.Player("./audio/FWDL.[mp3|ogg]")
+
+
+
+        player.chain(reverb, chorus, tremolo, Tone.Master);
 
         //bind the interface
-        document.querySelector("tone-player").bind(player);
         document.querySelector("tone-play-toggle").bind(player);
+        document.querySelector("tone-reverb").bind(reverb);
+        document.querySelector("tone-chorus").bind(chorus);
+        document.querySelector("tone-Tremolo").bind(tremolo);
+        document.querySelector("tone-player").bind(player);
+
+        var ReverbLastVal = 0
+        var ChorusLastVal = 0
+        var TremoloLastVal = 0
+
+        function ReverbToggle() {
+            if (reverb.wet.value > 0) {
+                ReverbLastVal = reverb.wet.value
+                reverb.wet.value = 0;
+            } else
+                reverb.wet.value = ReverbLastVal;
+        }
+
+        function ChorusToggle() {
+            if (chorus.wet.value > 0) {
+                ChorusLastVal = chorus.wet.value
+                chorus.wet.value = 0;
+            } else
+                chorus.wet.value = ChorusLastVal;
+        }
+
+        function TremToggle() {
+            if (tremolo.wet.value > 0) {
+                TremoloLastVal = tremolo.wet.value
+                tremolo.wet.value = 0;
+            } else
+                tremolo.wet.value = TremoloLastVal;
+        }
     </script>
 
 </body>

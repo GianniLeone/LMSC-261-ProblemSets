@@ -3,6 +3,10 @@
 <html>
 
 <head>
+
+
+    <!-- Container element -->
+    <div class="parallax"></div>
     <link rel="stylesheet" href="styles.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
@@ -24,6 +28,7 @@
 </head>
 
 <body>
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Giannis Website</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,76 +44,154 @@
         </div>
     </nav>
 
+    <body>
+
+        <style type="text/css">
+            tone-play-toggle,
+            tone-fft {
+                margin-bottom: 10px;
+            }
+            
+            tone-fft {
+                background-color: black;
+                height: 40px;
+                width: 100%;
+                border-radius: 20px;
+            }
+        </style>
+
+        <tone-loader></tone-loader>
+
+        <tone-explanation label="Player">
+            Click on the button to play the audio file on loop using <a href="https://tonejs.github.io/docs/Player">Tone.Player</a>.
+        </tone-explanation>
+
+        <tone-content>
+
+            <tone-volume></tone-volume>
+            <tone-fft></tone-fft>
+            <tone-play-toggle></tone-play-toggle>
+            <tone-player></tone-player>
+
+            <button id="ChorusToggle" type="button" class="btn btn-outline-success" onclick="ChorusToggle()">ON</button>
+            <tone-chorus></tone-chorus>
+            <button id="TremToggle" type="button" class="btn btn-outline-success" onclick="TremToggle()">ON</button>
+            <tone-tremolo></tone-tremolo>
+            <button id="DelayToggle" type="button" class="btn btn-outline-success" onclick="DelayToggle()">ON</button>
+            <tone-ping-pong-delay></tone-ping-pong-delay>
+            <button id="ReverbToggle" type="button" class="btn btn-outline-success" onclick="ReverbToggle()">ON</button>
+            <tone-reverb></tone-reverb>
 
 
-    <tone-loader></tone-loader>
 
-    <tone-explanation label="Player">
-        Click on the button to play the audio file on loop using <a href="https://tonejs.github.io/docs/Player">Tone.Player</a>.
-    </tone-explanation>
+        </tone-content>
 
-    <tone-content>
+        <script type="text/javascript">
+            //the player
 
-        <tone-play-toggle></tone-play-toggle>
-        <tone-player></tone-player>
-        <button onclick="ReverbToggle()">ON/OFF</button>
-        <tone-reverb></tone-reverb>
-        <button onclick="ChorusToggle()">ON/OFF</button>
-        <tone-chorus></tone-chorus>
-        <button onclick="TremoloToggle()">ON/OFF</button>
-        <tone-tremolo></tone-tremolo>
+            var audioFile = prompt("Please enter audio file URL: ", "https://files.htp.sh/6QZO2IV.m4a")
 
-    </tone-content>
-
-    <script type="text/javascript">
-        //the player
-
-        var reverb = new Tone.Reverb();
-        reverb.generate()
-        var chorus = new Tone.Chorus(4, 2.5, 0.5);
-        var tremolo = new Tone.Tremolo(9, 0.75);
-        var player = new Tone.Player("./audio/FWDL.[mp3|ogg]")
+            var vol = new Tone.Volume(-12);
+            var chorus = new Tone.Chorus(4, 2.5, 0.5);
+            var tremolo = new Tone.Tremolo(9, 0.75);
+            var delay = new Tone.PingPongDelay("8n", 0.5);
+            var reverb = new Tone.Reverb();
+            reverb.generate()
+            var player = new Tone.Player(audioFile);
 
 
+            player.chain(vol, chorus, tremolo, delay, reverb, Tone.Master);
 
-        player.chain(reverb, chorus, tremolo, Tone.Master);
 
-        //bind the interface
-        document.querySelector("tone-play-toggle").bind(player);
-        document.querySelector("tone-reverb").bind(reverb);
-        document.querySelector("tone-chorus").bind(chorus);
-        document.querySelector("tone-Tremolo").bind(tremolo);
-        document.querySelector("tone-player").bind(player);
+            //bind the interface
+            document.querySelector("tone-fft").bind(player);
+            document.querySelector("tone-player").bind(player);
+            document.querySelector("tone-play-toggle").bind(player);
+            document.querySelector("tone-chorus").bind(chorus);
+            document.querySelector("tone-Tremolo").bind(tremolo);
+            document.querySelector("tone-pingpongdelay").bind(delay);
+            document.querySelector("tone-reverb").bind(reverb);
 
-        var ReverbLastVal = 0
-        var ChorusLastVal = 0
-        var TremoloLastVal = 0
 
-        function ReverbToggle() {
-            if (reverb.wet.value > 0) {
-                ReverbLastVal = reverb.wet.value
-                reverb.wet.value = 0;
-            } else
-                reverb.wet.value = ReverbLastVal;
-        }
 
-        function ChorusToggle() {
-            if (chorus.wet.value > 0) {
-                ChorusLastVal = chorus.wet.value
-                chorus.wet.value = 0;
-            } else
-                chorus.wet.value = ChorusLastVal;
-        }
+            var ReverbLastVal = 0
+            var ChorusLastVal = 0
+            var TremoloLastVal = 0
+            var DelayLastVal = 0
 
-        function TremToggle() {
-            if (tremolo.wet.value > 0) {
-                TremoloLastVal = tremolo.wet.value
-                tremolo.wet.value = 0;
-            } else
-                tremolo.wet.value = TremoloLastVal;
-        }
-    </script>
 
+
+            function ReverbToggle() {
+                var button = document.getElementById("ReverbToggle");
+                if (reverb.wet.value > 0) {
+                    button.classList.remove("btn-outline-success");
+                    button.classList.add("btn-outline-danger");
+                    button.innerHTML = "OFF"
+                    ReverbLastVal = reverb.wet.value
+                    reverb.wet.value = 0;
+                } else {
+                    button.innerHTML = "ON"
+                    button.classList.remove("btn-outline-danger");
+                    button.classList.add("btn-outline-success");
+                    reverb.wet.value = ReverbLastVal;
+                }
+            }
+
+            function ChorusToggle() {
+                var button = document.getElementById("ChorusToggle");
+                if (chorus.wet.value > 0) {
+                    button.classList.remove("btn-outline-success");
+                    button.classList.add("btn-outline-danger");
+                    button.innerHTML = "OFF"
+                    ChorusLastVal = chorus.wet.value
+                    chorus.wet.value = 0;
+                    if (chorus.wet.value > 0) {
+                        button.classList.remove("btn-outline-success");
+                        button.classList.add("btn-outline-danger");
+                        button.innerHTML = "OFF"
+                        ChorusLastVal = chorus.wet.value
+                        chorus.wet.value = 0;
+                    } else {
+                        button.innerHTML = "ON"
+                        button.classList.remove("btn-outline-danger");
+                        button.classList.add("btn-outline-success");
+                        chorus.wet.value = ChorusLastVal;
+                    }
+                }
+
+                function TremToggle() {
+                    var button = document.getElementById("TremToggle");
+                    if (tremolo.wet.value > 0) {
+                        button.classList.remove("btn-outline-success");
+                        button.classList.add("btn-outline-danger");
+                        button.innerHTML = "OFF"
+                        TremoloLastVal = tremolo.wet.value
+                        tremolo.wet.value = 0;
+                    } else {
+                        button.innerHTML = "ON"
+                        button.classList.remove("btn-outline-danger");
+                        button.classList.add("btn-outline-success");
+                        tremolo.wet.value = TremoloLastVal;
+                    }
+                }
+
+                function DelayToggle() {
+                    var button = document.getElementById("DelayToggle");
+                    if (delay.wet.value > 0) {
+                        button.classList.remove("btn-outline-success");
+                        button.classList.add("btn-outline-danger");
+                        button.innerHTML = "OFF"
+                        DelayLastVal = delay.wet.value
+                        delay.wet.value = 0;
+                    } else {
+                        button.innerHTML = "ON"
+                        button.classList.remove("btn-outline-danger");
+                        button.classList.add("btn-outline-success");
+                        delay.wet.value = DelayLastVal;
+                    }
+                }
+        </script>
+    </body>
 </body>
 
 </html>

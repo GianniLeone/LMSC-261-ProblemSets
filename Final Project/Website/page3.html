@@ -1,170 +1,78 @@
 <!DOCTYPE html>
+
 <html>
-    <head>
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <script 
-            src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-        </script>
-        <title>
-            Background Colors
-        </title>
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Giannis Website</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <meta charset="utf-8">
+    <title>Piano</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" type="image/png" sizes="174x174" href="./favicon.png">
+
+    <script src="https://unpkg.com/@webcomponents/webcomponentsjs@^2/webcomponents-bundle.js"></script>
+    <script src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
+    <script src="tonejs-ui.js"></script>
+    <style type="text/css">
+        tone-play-toggle {
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Giannis Website</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div class="navbar-nav">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
                 <a class="nav-item nav-link" href="index.html">Home </a>
                 <a class="nav-item nav-link" href="page1.html">Page 1</a>
                 <a class="nav-item nav-link" href="page2.html">Page 2</a>
                 <a class="nav-item nav-link active" href="page3.html">Page 3</a>
-              </div>
             </div>
-          </nav>
-  
-          <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-            <div class="col-md-5 p-lg-5 mx-auto my-5">
-              <h1 class="display-4 font-weight-normal">Punny headline</h1>
-              <p class="lead font-weight-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this example based on Apple's marketing pages.</p>
-              <a class="btn btn-outline-secondary" href="#">Coming soon</a>
-            </div>
-            <div class="product-device box-shadow d-none d-md-block"></div>
-            <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
-          </div>
-      
-          <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-            <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
-              <div class="my-3 py-3">
-                <h2 class="display-5">Another headline</h2>
-                <p class="lead">And an even wittier subheading.</p>
-              </div>
-              <div class="bg-light box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-            </div>
-            <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-              <div class="my-3 p-3">
-                <h2 class="display-5">Another headline</h2>
-                <p class="lead">And an even wittier subheading.</p>
-              </div>
-              <div class="bg-dark box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-            </div>
-          </div>
-      
-          <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-            <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-              <div class="my-3 p-3">
-                <h2 class="display-5">Another headline</h2>
-                <p class="lead">And an even wittier subheading.</p>
-              </div>
-              <div class="bg-dark box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-            </div>
-            <div class="bg-primary mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
-              <div class="my-3 py-3">
-                <h2 class="display-5">Another headline</h2>
-                <p class="lead">And an even wittier subheading.</p>
-              </div>
-              <div class="bg-light box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-            </div>
-          </div>
-      
-          <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-            <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-              <div class="my-3 p-3">
-                <h2 class="display-5">Another headline</h2>
-                <p class="lead">And an even wittier subheading.</p>
-              </div>
-              <div class="bg-white box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-            </div>
-            <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-              <div class="my-3 py-3">
-                <h2 class="display-5">Another headline</h2>
-                <p class="lead">And an even wittier subheading.</p>
-              </div>
-              <div class="bg-white box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-            </div>
-          </div>
-      
-          <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-            <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-              <div class="my-3 p-3">
-                <h2 class="display-5">Another headline</h2>
-                <p class="lead">And an even wittier subheading.</p>
-              </div>
-              <div class="bg-white box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-            </div>
-            <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-              <div class="my-3 py-3">
-                <h2 class="display-5">Another headline</h2>
-                <p class="lead">And an even wittier subheading.</p>
-              </div>
-              <div class="bg-white box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-            </div>
-          </div>
-      
-          <footer class="container py-5">
-            <div class="row">
-              <div class="col-12 col-md">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="d-block mb-2"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
-                <small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
-              </div>
-              <div class="col-6 col-md">
-                <h5>Features</h5>
-                <ul class="list-unstyled text-small">
-                  <li><a class="text-muted" href="#">Cool stuff</a></li>
-                  <li><a class="text-muted" href="#">Random feature</a></li>
-                  <li><a class="text-muted" href="#">Team feature</a></li>
-                  <li><a class="text-muted" href="#">Stuff for developers</a></li>
-                  <li><a class="text-muted" href="#">Another one</a></li>
-                  <li><a class="text-muted" href="#">Last time</a></li>
-                </ul>
-              </div>
-              <div class="col-6 col-md">
-                <h5>Resources</h5>
-                <ul class="list-unstyled text-small">
-                  <li><a class="text-muted" href="#">Resource</a></li>
-                  <li><a class="text-muted" href="#">Resource name</a></li>
-                  <li><a class="text-muted" href="#">Another resource</a></li>
-                  <li><a class="text-muted" href="#">Final resource</a></li>
-                </ul>
-              </div>
-              <div class="col-6 col-md">
-                <h5>Resources</h5>
-                <ul class="list-unstyled text-small">
-                  <li><a class="text-muted" href="#">Business</a></li>
-                  <li><a class="text-muted" href="#">Education</a></li>
-                  <li><a class="text-muted" href="#">Government</a></li>
-                  <li><a class="text-muted" href="#">Gaming</a></li>
-                </ul>
-              </div>
-              <div class="col-6 col-md">
-                <h5>About</h5>
-                <ul class="list-unstyled text-small">
-                  <li><a class="text-muted" href="#">Team</a></li>
-                  <li><a class="text-muted" href="#">Locations</a></li>
-                  <li><a class="text-muted" href="#">Privacy</a></li>
-                  <li><a class="text-muted" href="#">Terms</a></li>
-                </ul>
-              </div>
-            </div>
-          </footer>
-      
-      
-          <!-- Bootstrap core JavaScript
-          ================================================== -->
-          <!-- Placed at the end of the document so the pages load faster -->
-          <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-          <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-          <script src="../../assets/js/vendor/popper.min.js"></script>
-          <script src="../../dist/js/bootstrap.min.js"></script>
-          <script src="../../assets/js/vendor/holder.min.js"></script>
-          <script>
-            Holder.addTheme('thumb', {
-              bg: '#55595c',
-              fg: '#eceeef',
-              text: 'Thumbnail'
-            });
-          </script>
-    </body>
+        </div>
+    </nav>
+
+
+    <style>
+        tone-piano {
+            margin-bottom: 10px;
+        }
+    </style>
+
+    <tone-explanation label="Polyphony">
+        <a href="https://tonejs.github.io/docs/PolySynth">Tone.PolySynth</a> handles voice creation and allocation for any monophonic instruments passed in as the second parameter. PolySynth is not a synthesizer by itself, it merely manages voices of
+        one of the other types of synths, allowing any of the monophonic synthesizers to be polyphonic.
+    </tone-explanation>
+
+    <tone-content>
+        <tone-piano polyphonic=""></tone-piano>
+        <tone-synth polyphonic=""></tone-synth>
+    </tone-content>
+
+
+    <script type="text/javascript">
+        var synth = new Tone.PolySynth(8, Tone.Synth, {
+            "oscillator": {
+                "partials": [0, 2, 3, 4],
+            }
+        }).toMaster();
+        var lfo = new Tone.LFO("4n", 400, 4000);
+        lfo.connect(filter.frequency);
+
+
+        //bind the interface
+        document.querySelector("tone-piano").bind(synth);
+        document.querySelector("tone-synth").bind(synth);
+    </script>
+
+</body>
+
 </html>

@@ -32,9 +32,9 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="index.html">Home </a>
-                <a class="nav-item nav-link" href="page1.html">Page 1</a>
-                <a class="nav-item nav-link active" href="page2.html">Page 2</a>
-                <a class="nav-item nav-link" href="page3.html">Page 3</a>
+                <a class="nav-item nav-link" href="page1.html">Effects</a>
+                <a class="nav-item nav-link active" href="page2.html">Granular</a>
+                <a class="nav-item nav-link" href="page3.html">Synth</a>
             </div>
         </div>
     </nav>
@@ -72,8 +72,9 @@
 
         <script type="text/javascript">
             //the player
+            var audioFile = prompt("Please enter audio file URL: ", "https://files.htp.sh/Sv6e1U1.m4a")
             var player = new Tone.GrainPlayer({
-                "url": "./audio/FWDL.[mp3|ogg]",
+                "url": audioFile,
                 "loop": true,
                 "grainSize": 0.1,
                 "overlap": 0.05,

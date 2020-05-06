@@ -33,9 +33,9 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="index.html">Home </a>
-                <a class="nav-item nav-link" href="page1.html">Page 1</a>
-                <a class="nav-item nav-link" href="page2.html">Page 2</a>
-                <a class="nav-item nav-link active" href="page3.html">Page 3</a>
+                <a class="nav-item nav-link" href="page1.html">Effects</a>
+                <a class="nav-item nav-link" href="page2.html">Granular</a>
+                <a class="nav-item nav-link active" href="page3.html">Synth</a>
             </div>
         </div>
     </nav>
@@ -47,26 +47,32 @@
         }
     </style>
 
-    <tone-explanation label="Polyphony">
-        <a href="https://tonejs.github.io/docs/PolySynth">Tone.PolySynth</a> handles voice creation and allocation for any monophonic instruments passed in as the second parameter. PolySynth is not a synthesizer by itself, it merely manages voices of
-        one of the other types of synths, allowing any of the monophonic synthesizers to be polyphonic.
+    <tone-explanation label="Synthesis">
+        Synthesis is another method of creating musical sounds. Simply put, sound synthesis is the act of creating an audio signal. We are using the Tone.js framework to emulate synthesis
     </tone-explanation>
 
     <tone-content>
-        <tone-piano polyphonic=""></tone-piano>
-        <tone-synth polyphonic=""></tone-synth>
+        <tone-piano polyphonic></tone-piano>
+        <tone-synth polyphonic></tone-synth>
     </tone-content>
 
 
     <script type="text/javascript">
-        var synth = new Tone.PolySynth(8, Tone.Synth, {
+        var synth = new Tone.PolySynth({
             "oscillator": {
-                "partials": [0, 2, 3, 4],
-            }
+                "type": "amtriangle",
+                "harmonicity": 0.5,
+                "modulationType": "sine"
+            },
+            "envelope": {
+                "attackCurve": "exponential",
+                "attack": 0.05,
+                "decay": 0.2,
+                "sustain": 0.2,
+                "release": 1.5,
+            },
+            "portamento": 0.05
         }).toMaster();
-        var lfo = new Tone.LFO("4n", 400, 4000);
-        lfo.connect(filter.frequency);
-
 
         //bind the interface
         document.querySelector("tone-piano").bind(synth);
